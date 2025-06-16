@@ -4,13 +4,13 @@ export class Book{
 
     title: string
     author: string
-    isbn: Uuid
+    isbn: string
     publish_year: number
 
     constructor(title: string, author: string, publish_year: number){
         this.title = title
         this.author = author
-        this.isbn = new Uuid()
+        this.isbn = new Uuid().get_value()
         this.publish_year = publish_year
     }
 
@@ -23,7 +23,7 @@ export class Book{
     }
 
     public get_isbn():string{
-        return this.isbn.get_value()
+        return this.isbn
     }
 
     public get_publish_year(): number{
