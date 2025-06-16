@@ -1,0 +1,29 @@
+{
+  "name": "desafio-de-projeto",
+  "version": "1.0.0",
+  "description": "Sistema de gerenciamento de biblioteca desenvolvido com TypeScript, com foco na criação de uma API RESTful para gerenciamento de livros. O projeto implementa operações CRUD (Create, Read, Update, Delete) e se conecta a um banco de dados relacional ou não relacional.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "@types/knex": "^0.15.2",
+    "@types/typescript": "^0.4.29",
+    "@types/uuid": "^10.0.0",
+    "express": "^5.1.0",
+    "knex": "^3.1.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.14.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "uuid": "^11.1.0"
+  }
+}
