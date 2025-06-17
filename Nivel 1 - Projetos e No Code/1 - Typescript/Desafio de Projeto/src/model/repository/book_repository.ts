@@ -8,6 +8,10 @@ interface BookRow{
     title: string
     publish_year: number
 }
+
+export interface BookUpdate extends BookRow{
+    isbn: string
+}
 export class BookRepository implements book_repository_interface{
     
 
@@ -55,8 +59,13 @@ export class BookRepository implements book_repository_interface{
         
 
     }
-    update_book(): void {
-        throw new Error("Method not implemented.");
+    async update_book(book: BookUpdate): Promise<void> {
+        const query = `
+            UPDATE books
+            SET title = ?, author = ?, publish_year = ?
+            WHERE isbn = ?
+        `
+        await this.connection.execute(query, [book["title"], book["author"], book["publish_year"], book["isbn"]])
     }
     
 }
