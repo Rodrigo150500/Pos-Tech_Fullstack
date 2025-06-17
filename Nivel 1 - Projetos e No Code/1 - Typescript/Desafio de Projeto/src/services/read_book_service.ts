@@ -1,6 +1,6 @@
 import { book_repository_interface } from "../model/repository/interface/product_repository_interface"
 
-interface isbn{
+export interface isbn{
     uuid:string
 }
 
@@ -14,7 +14,7 @@ export class ReadBookService{
 
     async read_book(http_request: isbn){
         const book = await this.#get_book(http_request.uuid)
-        
+
         return book
     }
 

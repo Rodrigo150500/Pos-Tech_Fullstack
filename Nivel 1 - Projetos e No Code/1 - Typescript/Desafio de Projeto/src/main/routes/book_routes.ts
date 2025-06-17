@@ -1,9 +1,12 @@
 import { Request, Response } from "express";
 import { Router } from "express";
-import { create_book_composer } from "../composer/create_book_compose";
+import { create_book_composer } from "../composer/create_book_composer";
 import { read_book_composer } from "../composer/read_book_composer";
+import { delete_book_composer } from "../composer/delete_book_composer";
+import { my_sql_connection } from "../../model/settings/my_sql_configs";
 
 const router = Router()
+my_sql_connection.connect()
 
 router.post("/book",(http_request: Request, http_response:Response)=>{
 
@@ -17,6 +20,12 @@ router.post("/read", (http_request: Request, http_response: Response)=>{
     const controller = read_book_composer()
 
     const response = controller.read(http_request, http_response)
+})
+
+router.delete("/delete",(http_request: Request, http_response: Response)=>{
+    const controller = delete_book_composer()
+    
+    const response = controller.delete(http_request, http_response)
 })
 
 export {router}

@@ -47,8 +47,13 @@ export class BookRepository implements book_repository_interface{
         }
         return null
     }
-    delete_book(): void {
-        throw new Error("Method not implemented.");
+    async delete_book(isbn: string): Promise<void> {
+        const query = `
+            DELETE FROM books WHERE isbn = ?
+            `
+        await this.connection.execute(query, [isbn])
+        
+
     }
     update_book(): void {
         throw new Error("Method not implemented.");
