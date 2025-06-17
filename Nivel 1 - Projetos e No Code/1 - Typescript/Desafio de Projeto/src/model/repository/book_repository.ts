@@ -1,16 +1,23 @@
-import { Pool } from "mysql2";
+import { Pool,RowDataPacket  } from "mysql2/promise";
 import { Book } from "../book/livro";
 import { book_repository_interface } from "./interface/product_repository_interface";
+import { Uuid } from "../book/uuid";
 
+interface BookRow{
+    author: string
+    title: string
+    publish_year: number
+}
 export class BookRepository implements book_repository_interface{
     
+
     private connection: Pool
 
     constructor(connection: Pool){
         this.connection = connection
     }
 
-    create_book(book: Book): void {
+    async create_book(book: Book): Promise<void> {
 
         const author = book.get_author()
         const title = book.get_title()
@@ -23,10 +30,22 @@ export class BookRepository implements book_repository_interface{
             VALUES
                 (?,?,?,?)
             `
-        this.connection.execute(query,[isbn, title, author, publish_year])
+        await this.connection.execute(query,[isbn, title, author, publish_year])
     }
-    read_book(): Array<Book> {
-        throw new Error("Method not implemented.");
+    async read_book_by_id(isbn: string): Promise<Book | null> {
+
+        const isbn_id = isbn
+                
+        const query = `
+            SELECT * FROM books WHERE isbn = ?
+        `
+        const [rows] = await this.connection.execute<(BookRow & RowDataPacket)[]>(query, [isbn_id]);
+        if (Array.isArray(rows) && rows.length > 0){
+            const row = rows[0]
+            const book = new Book(row.title, row.author, row.publish_year)
+            return book
+        }
+        return null
     }
     delete_book(): void {
         throw new Error("Method not implemented.");

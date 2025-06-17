@@ -17,8 +17,8 @@ export class CreateBookService{
 
     public create_book(http_request: BookRequestDTO){
 
-        const title:string = http_request["title"]
-        const author:string = http_request["author"]
+        const title = http_request["title"]
+        const author = http_request["author"]
         const publish_year = http_request["publish_year"]
         
         const book = new Book(title, author, publish_year)

@@ -1,4 +1,4 @@
-import {createPool, Pool} from "mysql2"
+import {createPool, Pool} from "mysql2/promise"
 
 class MySqlConnection{
 
