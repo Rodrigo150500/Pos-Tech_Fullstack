@@ -1,11 +1,11 @@
 import type { Person } from "@/entities/person.entity.js";
 import type { User } from "@/entities/user.entity.js";
-import { UserReposirory } from "@/repositories/user.repository.js";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error.js";
+import type { IUserRepository } from "@/repositories/user.repository.interface.js";
 
 export class FindWithPerson{
 
-    constructor(private userRepository: UserReposirory){}
+    constructor(private userRepository: IUserRepository){}
 
     async handler(userId: number): Promise<(Person & User) | undefined>{
 

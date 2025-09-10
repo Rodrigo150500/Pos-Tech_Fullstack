@@ -1,4 +1,4 @@
-import { UserReposirory } from "@/repositories/user.repository.js";
+import { UserReposirory } from "@/repositories/pg/user.repository.js";
 import { FindWithPerson } from "../find-with-person.js";
 
 export function makeFindWithPerson(){

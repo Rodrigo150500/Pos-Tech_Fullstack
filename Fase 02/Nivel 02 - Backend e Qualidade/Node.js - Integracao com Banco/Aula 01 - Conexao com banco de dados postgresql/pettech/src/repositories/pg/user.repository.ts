@@ -5,7 +5,7 @@ import { database } from "@/lib/pg/db.js";
 
 export class UserReposirory{
 
-    async create({username, password}:User): Promise<User | undefined>{
+    public async create({username, password}:User): Promise<User | undefined>{
         const result = await database.clientInstance?.query(
             `INSERT INTO "user" (username, password)  VALUES ($1, $2) RETURNING *`,
             [username, password]

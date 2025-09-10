@@ -1,4 +1,4 @@
-import { PersonRepository } from "@/repositories/person.repository.js";
+import { PersonRepository } from "@/repositories/pg/person.repository.js";
 import { CreatePersonUseCase } from "../create-person.js";
 
 export function makeCreatePersonUseCase(){

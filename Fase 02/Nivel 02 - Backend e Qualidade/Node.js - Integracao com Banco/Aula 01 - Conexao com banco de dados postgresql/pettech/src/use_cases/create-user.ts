@@ -1,9 +1,9 @@
 import { User } from "@/entities/user.entity.js";
-import { UserReposirory } from "@/repositories/user.repository.js";
+import type { IUserRepository } from "@/repositories/user.repository.interface.js";
 
 export class CreateUserUseCase{
 
-    constructor(private userRepository: UserReposirory){}
+    constructor(private userRepository: IUserRepository){}
 
     async handler(user:User):Promise<User | undefined>{
 
