@@ -1,5 +1,4 @@
-import { UserReposirory } from "@/repositories/user.repository.js";
-import { CreateUserUseCase } from "@/use_cases/create-user.js";
+import { makeCreateUserUseCase } from "@/use_cases/factory/make-create-user-use-case.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import {z} from "zod"
 
@@ -13,8 +12,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
     const {username, password} = bodySchema.parse(request.body)
 
     try{
-        const userRepository = new UserReposirory()
-        const createUseCase = new CreateUserUseCase(userRepository)
+        const createUseCase = makeCreateUserUseCase()
 
         const response = await createUseCase.handler({username, password})
         
@@ -25,8 +23,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
         console.log(`Error server ${error}`)
 
         throw new Error(`Error server: ${error} `)
-    }
-    
+    }   
 
 
 }

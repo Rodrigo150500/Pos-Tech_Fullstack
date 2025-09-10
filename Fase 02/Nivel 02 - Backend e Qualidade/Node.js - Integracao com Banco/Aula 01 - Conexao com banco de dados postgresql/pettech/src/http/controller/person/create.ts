@@ -1,5 +1,4 @@
-import { PersonRepository } from "@/repositories/person.repository.js";
-import { CreatePersonUseCase } from "@/use_cases/create-person.js";
+import { makeCreatePersonUseCase } from "@/use_cases/factory/make-create-person-use-case.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -9,19 +8,19 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
         cpf: z.string(),
         name: z.string(),
         birth: z.coerce.date(),
-        email: z.string().email()
+        email: z.string().email(),
+        user_id: z.coerce.number()
     })
 
-    const {cpf, name, birth, email} = registerBodySchema.parse(request.body)
+    const {cpf, name, birth, email, user_id} = registerBodySchema.parse(request.body)
 
     try{
 
-        const personRepository = new PersonRepository()
-        const createPersonUseCase = new CreatePersonUseCase(personRepository)
+        const createPersonUseCase = makeCreatePersonUseCase()
 
-        await createPersonUseCase.handler({cpf, name, birth, email})
+        const person = await createPersonUseCase.handler({cpf, name, birth, email, user_id})
         
-        return reply.status(201).send()
+        return reply.status(201).send(person)
 
     }catch(error){
         console.error(error)
