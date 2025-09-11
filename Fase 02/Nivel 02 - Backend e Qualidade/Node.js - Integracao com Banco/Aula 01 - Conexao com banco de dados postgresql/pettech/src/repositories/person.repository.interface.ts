@@ -1,6 +1,6 @@
-import type { Person } from "@/entities/person.entity.js";
+import type { IPerson } from "@/entities/models/person.interface.js";
 
 
 export interface IPersonRepository{
-    create(person: Person): Promise<Person | undefined>    
+    create(person: IPerson): Promise<IPerson | undefined>    
 }

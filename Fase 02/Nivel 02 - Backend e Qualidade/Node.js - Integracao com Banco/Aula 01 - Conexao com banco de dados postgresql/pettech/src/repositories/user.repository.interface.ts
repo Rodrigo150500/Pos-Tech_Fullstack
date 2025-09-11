@@ -1,9 +1,10 @@
-import type { Person } from "@/entities/person.entity.js";
-import type { User } from "@/entities/user.entity.js";
+import type { IPerson } from "@/entities/models/person.interface.js"
+import type { IUser } from "@/entities/models/user.interface.js"
+
 
 
 export interface IUserRepository{
-    create(user:User): Promise<User | undefined>
-    findWithPerson(userId: number):Promise<(User & Person) | undefined>
+    create(user:IUser): Promise<IUser | undefined>
+    findWithPerson(userId: number):Promise<(IUser & IPerson) | undefined>
     
 }

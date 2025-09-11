@@ -1,4 +1,6 @@
-export class User{
+import type { IUser } from "./models/user.interface.js"
+
+export class User implements IUser{
 
     id?: number
     username: string
